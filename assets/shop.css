@@ -260,3 +260,6 @@ body{font-size:18px}
 /* Richter 5: Kit nur hier */
 .nurhier{margin:0 0 4px;font-size:14px;font-weight:700;color:var(--gruen);text-align:center}
 @media(max-width:899px){.galerie__haupt{aspect-ratio:1/.86}.nurhier{margin:0 0 2px;line-height:1.25}}
+/* 07.11.2026: Zahlungsarten als SVG-Karten (wie lumiria) */
+.zahlung mark{background:none;display:flex;flex-wrap:wrap;gap:4px;padding:0}
+.zahlung svg[role=img]{display:block;flex:none}
