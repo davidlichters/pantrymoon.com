@@ -1,265 +1,185 @@
+/* Pantrymoon, ein Gestaltungssystem (David 07.11.2026). Vorher: 11 Nachtrags-Bloecke, 2 Schriften, 6 Akzentfarben.
+   Schrift: Figtree 400/700 fuer alles; Fraunces 600 nur in der Wortmarke.
+   Farben: Gruen (Marke), Creme (Grund), Gold (nur Sterne); dazu Weiss und Grautoene.
+   Abstand: 4 8 12 16 24 32 48 64. Schriftgroessen: 14 16 18 22 28 36. Ein Knopf, eine Karte, ein Abschnittsabstand. */
 @font-face{font-family:'Figtree';font-weight:300 900;font-style:normal;font-display:swap;src:url('../fonts/Figtree.woff2') format('woff2')}
 @font-face{font-family:'Fraunces';font-weight:600;font-style:normal;font-display:swap;src:url('../fonts/Fraunces-600.woff2') format('woff2')}
-:root{--gruen:#2F5D3A;--gruen-d:#234A2D;--gruen-h:#EAF1EA;--creme:#FBF8F1;--sand:#F2ECDF;--text:#1F2420;--grau:#5D655F;--linie:#E2DBCB;--tomate:#C2512F;--gelb:#FFE15A}
+:root{
+  --gruen:#2F5D3A;--gruen-d:#234A2D;--gruen-h:#EAF1EA;
+  --grund:#FBF8F1;--weiss:#fff;--text:#1F2420;--grau:#5D655F;--linie:#E4DED1;--stern:#E0A100;
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;
+  --r:12px;
+}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;font-family:'Figtree',system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.5;color:var(--text);background:var(--creme);overflow-x:hidden}
+body{margin:0;font-family:'Figtree',system-ui,-apple-system,sans-serif;font-size:18px;line-height:1.5;color:var(--text);background:var(--grund);overflow-x:hidden}
 img{max-width:100%;height:auto;display:block}
 a{color:var(--gruen)}
-h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.01em;line-height:1.15;margin:0 0 .4em}
-h2{font-size:27px}
-@media(min-width:900px){h2{font-size:36px}}
-mark.g{background:var(--gelb);color:#1F2420;padding:0 .2em;border-radius:3px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
-.wrap{max-width:1140px;margin:0 auto;padding:0 18px}
-.vorschau{background:#1F2420;color:#fff;font-size:12.5px;text-align:center;padding:6px 10px;letter-spacing:.02em}
-.leiste{background:var(--gruen);color:#fff;font-size:12.5px;text-align:center;padding:7px 10px;font-weight:600}
-.kopf{background:var(--creme);border-bottom:1px solid var(--linie)}
-.kopf .wrap{display:flex;align-items:center;justify-content:space-between;height:50px;gap:12px}
-.logo{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--text);font-family:'Fraunces',Georgia,serif;font-size:19px;font-weight:600;white-space:nowrap}
+h1,h2,h3{font-family:inherit;font-weight:700;line-height:1.2;letter-spacing:-.01em;margin:0 0 var(--s2)}
+h1{font-size:28px}
+h2{font-size:28px}
+h3{font-size:18px}
+p{margin:0 0 var(--s3)}
+p:last-child{margin-bottom:0}
+@media(min-width:900px){h1{font-size:36px}h2{font-size:36px}}
+.wrap{max-width:1140px;margin:0 auto;padding:0 var(--s4)}
+@media(min-width:900px){.wrap{padding:0 var(--s5)}}
+.nur-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Leiste und Kopf */
+.leiste{background:var(--gruen);color:var(--weiss);font-size:14px;font-weight:700;text-align:center;padding:var(--s2) var(--s4)}
+.kopf{border-bottom:1px solid var(--linie)}
+.kopf .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);height:56px}
+.logo{display:flex;align-items:center;gap:var(--s2);text-decoration:none;color:var(--text);font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:22px;white-space:nowrap}
 .logo b{color:var(--gruen);font-weight:600}
 .logo svg{width:24px;height:24px;flex:none}
-.nav{display:none;gap:22px;font-size:15px}
+.nav{display:none;gap:var(--s5);font-size:16px}
 .nav a{color:var(--text);text-decoration:none}
 .nav a:hover{color:var(--gruen)}
-.kopf .korb{font-size:14px;font-weight:700;color:var(--gruen);text-decoration:none;white-space:nowrap}
-@media(min-width:900px){.nav{display:flex}.logo{font-size:22px}}
+.korb{font-size:16px;font-weight:700;color:var(--gruen);text-decoration:none;white-space:nowrap}
+@media(min-width:900px){.nav{display:flex}}
+
 /* Produkt */
-.produkt{padding:10px 0 8px}
-.produkt .wrap{display:grid;gap:14px}
-@media(min-width:900px){.produkt{padding:34px 0 24px}.produkt .wrap{grid-template-columns:1.05fr 1fr;gap:44px;align-items:start}}
-.galerie__haupt{background:#fff;border:1px solid var(--linie);border-radius:14px;overflow:hidden;display:flex;justify-content:center;align-items:center;height:215px}
-.galerie__haupt img{max-height:215px;width:auto;object-fit:contain}
-@media(min-width:900px){.galerie__haupt{height:auto;aspect-ratio:1/1.05}.galerie__haupt img{max-height:none;width:100%;height:100%}}
-.daumen{display:flex;gap:8px;margin-top:8px;overflow-x:auto;scrollbar-width:none}
+.produkt{padding:var(--s3) 0 var(--s6)}
+.produkt .wrap{display:grid;gap:var(--s4)}
+.galerie,.kauf{min-width:0}
+.galerie{position:relative}
+.galerie__haupt{background:var(--weiss);border-radius:var(--r);overflow:hidden;aspect-ratio:1/.84;display:flex;align-items:center;justify-content:center}
+.galerie__haupt img{width:100%;height:100%;object-fit:contain}
+.galerie__haupt img.fuellt{object-fit:cover;object-position:50% 52%}
+.daumen{display:flex;gap:var(--s2);margin-top:var(--s2);overflow-x:auto;scrollbar-width:none}
 .daumen::-webkit-scrollbar{display:none}
-.daumen button{flex:none;width:52px;height:40px;padding:0;border:2px solid transparent;border-radius:8px;overflow:hidden;background:#fff;cursor:pointer}
+.daumen button{flex:none;width:64px;height:52px;padding:0;border:2px solid transparent;border-radius:8px;overflow:hidden;background:var(--weiss);cursor:pointer}
 .daumen button[aria-current=true]{border-color:var(--gruen)}
 .daumen img{width:100%;height:100%;object-fit:cover}
-.autorin{font-size:13px;color:var(--grau);margin:0 0 2px}
-.titel{font-size:24px;margin:0 0 4px}
-@media(min-width:900px){.titel{font-size:38px}.autorin{font-size:15px}}
-.nutzen{margin:0 0 8px;color:var(--grau);font-size:14.5px;line-height:1.4}
-.stufen{display:grid;gap:8px;margin:6px 0 10px;border:0;padding:0}
-.stufe{position:relative;display:flex;align-items:center;gap:10px;border:2px solid var(--linie);background:#fff;border-radius:12px;padding:9px 12px;cursor:pointer;min-height:52px}
+@media(max-width:899px){
+  /* Kritik 07.11. abends: keine Punktreihe auf dem Bild, nur ein kleiner Zaehler in der Ecke; Wischen wechselt das Bild */
+  .daumen{display:none}
+  .zaehler{position:absolute;right:var(--s2);bottom:var(--s2);background:rgba(31,36,32,.62);color:var(--weiss);font-size:12px;font-weight:700;line-height:1;padding:var(--s1) var(--s2);border-radius:999px;pointer-events:none}
+}
+@media(min-width:900px){.zaehler{display:none}}
+@media(min-width:900px){
+  .produkt{padding:var(--s7) 0}
+  .produkt .wrap{grid-template-columns:1.05fr 1fr;gap:var(--s7);align-items:start}
+  .galerie__haupt{aspect-ratio:1/1.05}
+}
+.titel{margin:0 0 var(--s1)}
+.sterne{display:inline-flex;align-items:center;gap:var(--s2);font-size:16px;font-weight:700;color:var(--text);text-decoration:none;margin:0 0 var(--s3)}
+.sterne__reihe{background:linear-gradient(90deg,var(--stern) var(--voll,100%),#D5D9D3 var(--voll,100%));-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:1px}
+.sterne--mitte{display:flex;justify-content:center;margin:var(--s2) 0 0}
+.nutzen{color:var(--grau);margin:0 0 var(--s4)}
+
+/* Stufen */
+.stufen{display:grid;gap:var(--s2);margin:0 0 var(--s4);padding:0;border:0}
+.stufe{display:flex;align-items:center;gap:var(--s3);background:var(--weiss);border:2px solid var(--linie);border-radius:var(--r);padding:var(--s3) var(--s4);cursor:pointer}
 .stufe input{position:absolute;opacity:0;pointer-events:none}
-.stufe .punkt{flex:none;width:18px;height:18px;border-radius:50%;border:2px solid var(--grau)}
+.stufe .punkt{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--grau)}
 .stufe.an{border-color:var(--gruen);background:var(--gruen-h)}
-.stufe.an .punkt{border-color:var(--gruen);box-shadow:inset 0 0 0 3px #fff;background:var(--gruen)}
-.stufe__text{flex:1;min-width:0;font-size:14.5px;line-height:1.25}
-.stufe__text strong{display:block;font-size:15.5px}
-.stufe__text small{color:var(--grau);font-size:12.5px}
-.stufe__preis{text-align:right;font-weight:800;font-size:16px;white-space:nowrap}
-.stufe__preis small{display:block;font-weight:600;font-size:12px;color:var(--gruen)}
-.etikett{position:absolute;top:-10px;right:10px;background:var(--tomate);color:#fff;font-size:11px;font-weight:800;padding:2px 8px;border-radius:20px;letter-spacing:.03em}
-.knopf{display:block;width:100%;border:0;border-radius:12px;background:var(--gruen);color:#fff;font:800 17px 'Figtree',sans-serif;padding:15px 16px;cursor:pointer;text-align:center;text-decoration:none}
-.knopf:hover{background:var(--gruen-d)}
-.unterknopf{font-size:13.5px;margin:8px 0 0;display:grid;gap:3px}
-.unterknopf>span::before{content:"\2713\00a0";color:var(--gruen);font-weight:800}
-.hinweis{display:none;margin:8px 0 0;font-size:13px;background:var(--sand);padding:8px 10px;border-radius:8px}
+.stufe.an .punkt{border-color:var(--gruen);background:var(--gruen);box-shadow:inset 0 0 0 3px var(--weiss)}
+.stufe__text{flex:1;min-width:0;line-height:1.3}
+.stufe__text strong{display:block;font-size:18px}
+.stufe__text small{display:block;font-size:16px;color:var(--grau)}
+.stufe__preis{font-size:18px;font-weight:700;white-space:nowrap}
+
+/* Knopf: einer fuer alles */
+.knopf{display:block;width:100%;border:2px solid var(--gruen);border-radius:var(--r);background:var(--gruen);color:var(--weiss);font:700 18px/1.2 'Figtree',sans-serif;padding:var(--s4);text-align:center;text-decoration:none;cursor:pointer}
+.knopf:hover{background:var(--gruen-d);border-color:var(--gruen-d)}
+.knopf--zweit{display:inline-block;width:auto;background:transparent;color:var(--gruen);padding:var(--s3) var(--s5)}
+.knopf--zweit:hover{background:var(--gruen-h);border-color:var(--gruen)}
+.hinweis{display:none;margin:var(--s2) 0 0;font-size:16px;background:var(--gruen-h);padding:var(--s2) var(--s3);border-radius:8px}
 .hinweis.zeigen{display:block}
-.box{background:#fff;border:1px solid var(--linie);border-radius:12px;padding:12px 14px;margin-top:12px;font-size:14px}
-.box h3{font-family:'Figtree',sans-serif;font-size:15px;font-weight:800;margin:0 0 4px}
-.box ul{margin:4px 0 0;padding-left:18px}
-/* Abschnitte */
-.abschnitt{padding:42px 0}
-.abschnitt.sand{background:var(--sand)}
-.abschnitt.gruen{background:var(--gruen);color:#fff}
-.abschnitt.gruen h2{color:#fff}
-.zentriert{text-align:center;max-width:680px;margin:0 auto 22px}
-.zentriert p{color:var(--grau);margin:0}
-.gruen .zentriert p{color:#DDE8DE}
-.karten{display:grid;gap:12px}
-@media(min-width:760px){.karten{grid-template-columns:repeat(3,1fr)}}
-.karte{background:#fff;border:1px solid var(--linie);border-radius:14px;padding:16px}
-.karte h3{font-size:19px}
-.karte p{margin:0;color:var(--grau);font-size:15px}
-.karte .wert{display:inline-block;margin-top:8px;font-weight:800;font-size:13px;color:var(--gruen)}
-.seiten{display:grid;gap:12px}
-@media(min-width:760px){.seiten{grid-template-columns:1fr 1fr}}
-.seiten figure{margin:0;background:#fff;border-radius:12px;overflow:hidden;border:1px solid var(--linie)}
-.seiten figcaption{font-size:13.5px;padding:8px 12px;color:var(--grau)}
-.liste{list-style:none;padding:0;margin:0;display:grid;gap:10px}
-.liste li{padding-left:28px;position:relative}
-.liste li::before{content:"";position:absolute;left:0;top:4px;width:18px;height:18px;border-radius:50%;background:var(--gruen-h) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3 3 7-7' fill='none' stroke='%232F5D3A' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
-.zwei{display:grid;gap:22px}
-@media(min-width:900px){.zwei{grid-template-columns:1fr 1fr;gap:44px;align-items:center}}
-.zitat{background:#fff;border-radius:14px;padding:16px;border:1px solid var(--linie);margin:0}
-.zitat p{margin:0 0 8px}
-.zitat cite{font-style:normal;font-weight:700;font-size:14px;color:var(--grau)}
-.gruen .zitat{background:var(--gruen-d);border-color:#3c6d48;color:#fff}
-.gruen .zitat cite{color:#C9DBCB}
-.stimmen{columns:1;column-gap:12px}
-@media(min-width:760px){.stimmen{columns:2}}
-@media(min-width:1050px){.stimmen{columns:3}}
-.stimmen .zitat{break-inside:avoid;margin:0 0 12px;display:inline-block;width:100%}
-.faq details{background:#fff;border:1px solid var(--linie);border-radius:12px;margin:0 0 8px}
-.faq summary{cursor:pointer;padding:14px 44px 14px 16px;font-weight:700;list-style:none;position:relative;min-height:44px}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";position:absolute;right:16px;top:11px;font-size:22px;color:var(--gruen)}
-.faq details[open] summary::after{content:"\2212"}
-.faq details>div{padding:0 16px 14px;color:var(--grau)}
-.faq{max-width:760px;margin:0 auto}
-/* Seiten */
-.seite{padding:30px 0 50px}
-.seite .wrap{max-width:780px}
-.seite h1{font-size:32px}
-.seite h2{font-size:22px;margin-top:26px}
-.seite p,.seite li{color:#333}
-/* Fuss */
-.fuss{background:#1F2420;color:#C9CEC9;font-size:14px;padding:34px 0 90px}
-.fuss a{color:#fff;text-decoration:none}
-.fuss__spalten{display:grid;gap:22px}
-@media(min-width:760px){.fuss__spalten{grid-template-columns:2fr 1fr 1fr}}
-.fuss h3{color:#fff;font-family:'Figtree',sans-serif;font-size:15px;margin:0 0 8px}
-.fuss ul{list-style:none;padding:0;margin:0;display:grid;gap:6px}
-.fuss ul a{display:inline-block;padding:3px 0}
-.fuss .klein{font-size:12px;color:#9AA39C;margin-top:24px;border-top:1px solid #333a35;padding-top:14px}
-/* Sticky */
-.klebe{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--linie);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:12px;transform:translateY(110%);transition:transform .25s;z-index:20;box-shadow:0 -6px 20px rgba(0,0,0,.06)}
-.klebe.an{transform:none}
-.klebe__text{flex:1;min-width:0;font-size:13.5px;line-height:1.25}
-.klebe__text strong{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.klebe .knopf{width:auto;padding:12px 18px;font-size:15px;flex:none}
-@media(min-width:900px){.klebe{justify-content:center}.klebe__text{flex:none;max-width:520px}}
-/* Richter-Runde 07.11.: Sterne, Weihnachtszeile, Spaeter-Preis, Zahlungszeile */
-.sterne{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;color:#1F2420;text-decoration:none;margin:0 0 4px}
-.sterne .sterne__reihe{background:linear-gradient(90deg,#E0A100 var(--voll,100%),#D5D9D3 var(--voll,100%));-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:1px;font-size:15px}
-.zitat .sterne__reihe{display:block;color:#E0A100;letter-spacing:1px;margin:0 0 6px}
+.unterknopf{list-style:none;padding:0;margin:var(--s3) 0 0;display:grid;gap:var(--s1);font-size:16px}
+.unterknopf li::before{content:"\2713\00a0";color:var(--gruen);font-weight:700}
+.zahlung{display:flex;align-items:center;flex-wrap:wrap;gap:var(--s1);margin-top:var(--s3);color:var(--grau)}
+.zahlung__sicher{display:inline-flex;margin-right:var(--s1)}
+.zahlung svg[role=img]{display:block;flex:none}
+
+/* Abschnitte: alle gleicher Grund, gleicher Abstand */
+.abschnitt{padding:var(--s7) 0;border-top:1px solid var(--linie)}
+@media(min-width:900px){.abschnitt{padding:var(--s8) 0}}
+.zentriert{text-align:center;max-width:680px;margin:0 auto var(--s5)}
+.zentriert p{color:var(--grau)}
+
+/* Karte: eine fuer alles */
+.karte,.zitat,.seiten figure,.kitbild,.faq details{background:var(--weiss);border:1px solid var(--linie);border-radius:var(--r)}
+.karte,.zitat{padding:var(--s4)}
+@media(min-width:900px){.karte,.zitat{padding:var(--s5)}}
+.karte p{color:var(--grau)}
+.karten{display:grid;gap:var(--s3)}
+@media(min-width:760px){.karten{grid-template-columns:repeat(3,1fr);gap:var(--s4)}}
+
+.seiten{display:grid;gap:var(--s3)}
+@media(min-width:760px){.seiten{grid-template-columns:1fr 1fr;gap:var(--s4)}}
+.seiten figure,.kitbild{margin:0;overflow:hidden}
+.seiten img,.kitbild img{background:#EFEBE2}
+.seiten figcaption,.kitbild figcaption{font-size:16px;color:var(--grau);padding:var(--s3) var(--s4)}
+.kitbild{max-width:620px;margin:0 auto var(--s4)}
+
+.zwei{display:grid;gap:var(--s5)}
+@media(min-width:900px){.zwei{grid-template-columns:1fr 1fr;gap:var(--s7);align-items:center}}
+.stapel{display:grid;gap:var(--s3)}
+.autorinfoto{float:left;width:96px;height:96px;object-fit:cover;object-position:50% 18%;border-radius:50%;margin:0 var(--s4) var(--s2) 0}
+@media(min-width:900px){.autorinfoto{width:128px;height:128px}}
+.autorin p{color:var(--grau)}
+.zitat{margin:0}
+.zitat p{margin:0 0 var(--s2)}
+.zitat cite{display:block;font-style:normal;font-weight:700;font-size:16px;color:var(--grau)}
+
+/* Bewertungen */
+.zitat .sterne__reihe{display:block;color:var(--stern);background:none;-webkit-background-clip:border-box;background-clip:border-box;margin:0 0 var(--s2)}
 .zitat .sterne__reihe .leer{color:#D5D9D3}
-.zitat p+p{margin-top:0}
-.stufe__text .vorteil{display:block;font-style:normal;font-weight:700;font-size:12px;color:var(--gruen)}
-.stufe__preis small.spaeter{color:var(--grau);font-weight:600}
-.weihnacht{margin:0 0 6px;font-size:14px;font-weight:800;color:#8A2B1E;text-align:center}
-.zahlung{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin:8px 0 0;font-size:11.5px}
-.zahlung__sicher{font-weight:700;color:var(--grau);margin-right:2px}
-.pille{display:inline-block;border:1px solid var(--linie);border-radius:5px;padding:2px 6px;margin:1px 2px;background:#fff;font-weight:700;color:#1F2420}
-.galerie,.kauf{min-width:0}
-.daumen{max-width:100%}
-@media(max-width:899px){.galerie__haupt{height:180px}.galerie__haupt img{max-height:180px}}
-@media(max-width:899px){
-.stufen legend{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-.stufen{gap:7px;margin-top:4px}
-.stufe{padding:7px 12px;min-height:48px}
-.nutzen{margin-bottom:6px}
-.daumen{margin-top:6px}
-}
-/* Richter-Runde 2, 07.11.: Fliesstext 18 px, Staffel-Nebentexte mind. 15 px, zwei Stufen, Stimmen mit Verteilung */
-body{font-size:18px}
-.nur-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.vorschau{font-size:13px}
-.leiste{font-size:14px}
-.autorin{font-size:15px}
-.nutzen{font-size:17px}
-.stufe__text{font-size:15px}
-.stufe__text strong{font-size:17px}
-.stufe__text small,.stufe__text .vorteil{font-size:15px;display:block}
-.stufe__preis{font-size:19px}
-.stufe__preis small,.stufe__preis small.spaeter{font-size:15px}
-.etikett{font-size:13px}
-.stufe__bild{flex:none;width:46px;height:46px;border-radius:8px;object-fit:cover;border:1px solid var(--linie)}
-.weihnacht{font-size:16px}
-.unterknopf{font-size:16px}
-.zahlung{font-size:14px}
-.hinweis{font-size:16px}
-.box{font-size:17px}
-.box h3{font-size:18px}
-.karte p{font-size:17px}
-.karte .wert{font-size:15px}
-.seiten figcaption{font-size:16px}
-.zitat cite{font-size:15px}
-.fuss{font-size:16px}
-.fuss h3{font-size:17px}
-.fuss .klein{font-size:14px}
-.klebe__text{font-size:15px}
-.klebe__text strong{font-size:17px}
-.sterne{font-size:15px}
-.kitbild{margin:22px auto 0;max-width:620px;background:#fff;border:1px solid var(--linie);border-radius:14px;overflow:hidden}
-.kitbild figcaption{font-size:15px;padding:10px 14px;color:var(--grau)}
-.vt{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;justify-content:center;max-width:620px;margin:0 auto 22px;background:#fff;border:1px solid var(--linie);border-radius:14px;padding:16px}
-.vt__schnitt{display:grid;justify-items:center;gap:2px;font-size:15px;color:var(--grau)}
-.vt__schnitt strong{font:600 40px/1 'Fraunces',Georgia,serif;color:var(--text)}
-.vt__schnitt .sterne__reihe{background:linear-gradient(90deg,#E0A100 var(--voll,100%),#D5D9D3 var(--voll,100%));-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:1px;font-size:20px}
-.vt__liste{flex:1;min-width:220px;display:grid;gap:4px;font-size:15px}
-.vt__zeile{display:grid;grid-template-columns:34px 1fr 26px;align-items:center;gap:8px}
-.vt__zeile span:last-child{text-align:right;color:var(--grau)}
-.vt__balken{height:9px;border-radius:9px;background:#E8E3D6;overflow:hidden}
-.vt__balken i{display:block;height:100%;background:#E0A100}
-.mehr{text-align:center;margin:8px 0 0}
-.mehr__knopf{font:700 17px 'Figtree',sans-serif;color:var(--gruen);background:#fff;border:2px solid var(--gruen);border-radius:12px;padding:12px 22px;cursor:pointer;min-height:48px}
-
-@media(max-width:899px){
-.galerie__haupt{height:240px}.galerie__haupt img{max-height:240px}
-.daumen button{width:46px;height:36px}
-.titel{font-size:26px;margin-bottom:0}
-.produkt .wrap{gap:10px}
-.stufe{padding:6px 10px;min-height:0;gap:9px}
-.stufen{margin:4px 0 8px}
-.weihnacht{margin-bottom:5px}
-}
-.stufen .spaeter{margin:0;font-size:15px;color:var(--grau);text-align:center}
-.stufe__preis{align-self:center}
-@media(max-width:899px){.stufe__bild{width:40px;height:40px}.stufe__text strong{white-space:nowrap}}
-.titelzeile{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 14px}
-.titelzeile .sterne{margin:0 0 4px}
-@media(max-width:899px){
-.produkt{padding-top:8px}
-.galerie__haupt{height:190px}.galerie__haupt img{max-height:190px}
-.daumen button{width:42px;height:32px}
-.nutzen{font-size:16px;line-height:1.35;margin-bottom:4px}
-.kopf .wrap{height:46px}
-.stufen .spaeter{font-size:15px}
-}
-@media(max-width:899px){
-.titelzeile{gap:0 10px}
-.titelzeile .sterne{font-size:15px;gap:4px}
-.titelzeile .sterne .sterne__reihe{font-size:14px;letter-spacing:0}
-.vorschau{padding:5px 10px}
-.leiste{padding:6px 10px}
-.galerie__haupt{height:180px}.galerie__haupt img{max-height:180px}
-}
-/* Richter-Runde 3, 07.11.: Hauptbild mobil quadratisch und volle Breite, Punkte statt Daumen, Zahlarten eine Zeile */
-@media(max-width:899px){
-.galerie{position:relative}
-.galerie__haupt{height:auto;aspect-ratio:1/1;width:100%}
-.galerie__haupt img{width:100%;height:100%;max-height:none;object-fit:contain}
-.galerie__haupt img.fuellt{object-fit:cover;object-position:50% 52%}
-.daumen{position:absolute;left:0;right:0;bottom:6px;margin:0;justify-content:center;gap:0;overflow:visible}
-.daumen button{width:22px;height:22px;border:0;border-radius:50%;background:transparent;display:grid;place-items:center}
-.daumen button img{display:none}
-.daumen button::before{content:"";width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.85);box-shadow:0 0 0 1px rgba(0,0,0,.25)}
-.daumen button[aria-current=true]::before{background:var(--gruen);box-shadow:0 0 0 1.5px #fff}
-}
-.zahlung{flex-wrap:nowrap;gap:4px;font-size:12px;margin-top:6px}
-.zahlung mark{display:flex;flex-wrap:nowrap;gap:4px;padding:1px 3px}
-.zahlung .pille{margin:0;padding:1px 5px;font-size:12px;border-radius:4px;white-space:nowrap}
-.zahlung__sicher{display:inline-flex;margin:0}
-.kauf>.spaeter{margin:8px 0 0;font-size:15px;color:var(--grau);text-align:center}
-@media(max-width:899px){.stufe{padding:5px 10px}.produkt .wrap{gap:8px}}
-@media(max-width:899px){.galerie__haupt{aspect-ratio:1/.93}}
-.zahlung,.zahlung mark{gap:3px}.zahlung .pille{font-size:11.5px;padding:1px 4px}.zahlung mark{padding:1px 2px}
-
-/* Alle Bewertungen (07.11.2026) */
-.zitat__titel{display:block;margin:0 0 6px;font-size:17px}
-.zitat__text{max-height:12.5em;overflow:hidden;position:relative}
+.zitat__titel{display:block;margin:0 0 var(--s2)}
+.zitat__text{max-height:12em;overflow:hidden;position:relative}
 .zitat__text:not(.offen)::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2.5em;background:linear-gradient(rgba(255,255,255,0),#fff)}
 .zitat__text.offen{max-height:none}
 .zitat__text.offen::after{display:none}
-.zitat__mehr{display:block;font:700 15px 'Figtree',sans-serif;color:var(--gruen);background:none;border:0;padding:4px 0 10px;cursor:pointer;text-decoration:underline}
-.zitat__fotos{display:flex;gap:6px;margin:4px 0 10px}
-.zitat__fotos img{width:72px;height:72px;object-fit:cover;border-radius:8px;display:block}
-.kfotos__titel{font-size:17px;margin:0 0 8px}
-.kfotos{display:flex;gap:8px;overflow-x:auto;margin:0 0 20px;padding-bottom:4px;scroll-snap-type:x mandatory}
+.zitat__mehr{display:block;font:700 16px 'Figtree',sans-serif;color:var(--gruen);background:none;border:0;padding:var(--s1) 0 var(--s3);cursor:pointer;text-decoration:underline}
+.zitat__fotos{display:flex;gap:var(--s2);margin:var(--s2) 0 var(--s3)}
+.zitat__fotos img{width:72px;height:72px;object-fit:cover;border-radius:8px;background:#EFEBE2}
+.kfotos{display:flex;gap:var(--s2);overflow-x:auto;margin:0 0 var(--s5);padding-bottom:var(--s1);scroll-snap-type:x mandatory}
 .kfotos a{flex:0 0 auto;scroll-snap-align:start}
-.kfotos img{width:150px;height:150px;object-fit:cover;border-radius:12px;display:block}
-.zitat cite{display:block}
-/* Richter 4: Autorinnenfoto (Verlag Hachette/Storey) und Zeile unter dem Titel */
-.autorinfoto{float:left;width:112px;height:112px;object-fit:cover;object-position:50% 18%;border-radius:50%;margin:4px 18px 10px 0;border:3px solid #fff}
-@media(min-width:900px){.autorinfoto{width:150px;height:150px}}
-.kauf .autorin{margin:0 0 4px}
-@media(max-width:899px){.kauf .autorin{font-size:13px;letter-spacing:-.1px}}
-/* Richter 5: Kit nur hier */
-.nurhier{margin:0 0 4px;font-size:14px;font-weight:700;color:var(--gruen);text-align:center}
-@media(max-width:899px){.galerie__haupt{aspect-ratio:1/.86}.nurhier{margin:0 0 2px;line-height:1.25}}
-/* 07.11.2026: Zahlungsarten als SVG-Karten (wie lumiria) */
-.zahlung mark{background:none;display:flex;flex-wrap:wrap;gap:4px;padding:0}
-.zahlung svg[role=img]{display:block;flex:none}
+.kfotos img{width:150px;height:150px;object-fit:cover;border-radius:var(--r);background:#EFEBE2}
+.stimmen{columns:1;column-gap:var(--s3)}
+@media(min-width:760px){.stimmen{columns:2;column-gap:var(--s4)}}
+@media(min-width:1050px){.stimmen{columns:3}}
+.stimmen .zitat{break-inside:avoid;display:inline-block;width:100%;margin:0 0 var(--s3)}
+.mehr{text-align:center;margin:var(--s4) 0 0}
+
+/* Liste und FAQ */
+.liste{list-style:none;padding:0;margin:0;display:grid;gap:var(--s3)}
+.liste li{padding-left:var(--s6);position:relative}
+.liste li::before{content:"";position:absolute;left:0;top:4px;width:20px;height:20px;border-radius:50%;background:var(--gruen-h) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3 3 7-7' fill='none' stroke='%232F5D3A' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
+.faq{max-width:760px;margin:0 auto}
+.faq details{margin:0 0 var(--s2)}
+.faq summary{cursor:pointer;padding:var(--s4) 48px var(--s4) var(--s4);font-weight:700;list-style:none;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:var(--s4);top:50%;transform:translateY(-50%);font-size:22px;color:var(--gruen)}
+.faq details[open] summary::after{content:"\2212"}
+.faq details>div{padding:0 var(--s4) var(--s4);color:var(--grau)}
+
+/* Unterseiten */
+.seite{padding:var(--s6) 0 var(--s7)}
+.seite .wrap{max-width:780px}
+.seite h2{font-size:22px;margin-top:var(--s5)}
+.seite p,.seite li{color:var(--grau)}
+.seite p strong{color:var(--text)}
+
+/* Fuss */
+.fuss{background:var(--gruen-d);color:#D3DED5;font-size:16px;padding:var(--s7) 0 96px}
+.fuss a{color:var(--weiss);text-decoration:none}
+.fuss .logo{color:var(--weiss)}
+.fuss .logo b{color:#A9D3AF}
+.fuss__spalten{display:grid;gap:var(--s5)}
+@media(min-width:760px){.fuss__spalten{grid-template-columns:2fr 1fr 1fr}}
+.fuss h3{color:var(--weiss);font-size:16px;margin:0 0 var(--s2)}
+.fuss p{margin:var(--s3) 0 0}
+.fuss ul{list-style:none;padding:0;margin:0;display:grid;gap:var(--s2)}
+.fuss .klein{font-size:14px;color:#AFC2B3;margin-top:var(--s5);border-top:1px solid rgba(255,255,255,.15);padding-top:var(--s4)}
+
+/* Klebeleiste */
+.klebe{position:fixed;left:0;right:0;bottom:0;background:var(--weiss);border-top:1px solid var(--linie);padding:var(--s3) var(--s4) calc(var(--s3) + env(safe-area-inset-bottom));display:flex;align-items:center;gap:var(--s3);transform:translateY(110%);transition:transform .25s;z-index:20}
+.klebe.an{transform:none}
+.klebe__text{flex:1;min-width:0;font-size:16px;line-height:1.3}
+.klebe__text strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.klebe .knopf{width:auto;padding:var(--s3) var(--s5);flex:none}
+@media(min-width:900px){.klebe{justify-content:center}.klebe__text{flex:none;max-width:520px}}
