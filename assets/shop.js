@@ -48,6 +48,24 @@
     e.textContent='between '+plus(+t[0])+' and '+plus(+t[1]);
   });
 
+  // Weihnachtsstichtag: letzter Bestelltag, an dem die laengste Lieferzeit noch vor dem 24.12. ankommt (heute gerechnet, nie ein festes Datum)
+  function wt(von,tage){var d=new Date(von),n=0;while(n<tage){d.setDate(d.getDate()+1);var w=d.getDay();if(w!==0&&w!==6)n++;}return d}
+  $$('[data-weihnacht]').forEach(function(e){
+    var heute=new Date();heute.setHours(0,0,0,0);
+    var max=+e.dataset.weihnacht,fest=new Date(heute.getFullYear(),11,24),letzt=null,d=new Date(heute);
+    var li=e.closest('[data-weihnacht-li]');
+    if(heute.getMonth()<9){e.textContent='';if(li)li.style.display='none';return}
+    while(d<fest){if(wt(d,max)<fest)letzt=new Date(d);d.setDate(d.getDate()+1)}
+    if(!letzt){
+      if(e.dataset.lang){e.textContent='For this year, delivery before Christmas can no longer be guaranteed.'}
+      else if(li){li.style.display='none'}
+      return;
+    }
+    var tag=letzt.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+    var lang=letzt.toLocaleDateString('en-US',{month:'long',day:'numeric'});
+    e.textContent=e.dataset.lang?('This year that means ordering by '+lang+'.'):('Order by '+tag+' for Christmas');
+  });
+
   // Stimmen: nach 6 Stueck "Show more"
   $$('[data-mehr]').forEach(function(b){
     var liste=$('.stimmen'),rest=null,pos=0,PRO=10;
